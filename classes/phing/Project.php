@@ -213,7 +213,8 @@ class Project {
             $this->log("Overriding previous definition of property " . $name, Project::MSG_VERBOSE);
         }
 
-        $this->log("Setting project property: " . $name . " -> " . $value, Project::MSG_DEBUG);
+        $logValue = is_array($value) ? implode(', ', $value) : $value;
+        $this->log("Setting project property: " . $name . " -> " . $logValue, Project::MSG_DEBUG);
         $this->properties[$name] = $value;
     }
 
@@ -233,7 +234,8 @@ class Project {
             $this->log("Override ignored for property " . $name, Project::MSG_DEBUG);
             return;
         }
-        $this->log("Setting project property: " . $name . " -> " . $value, Project::MSG_DEBUG);
+        $logValue = is_array($value) ? implode(', ', $value) : $value;
+        $this->log("Setting project property: " . $name . " -> " . $logValue, Project::MSG_DEBUG);
         $this->properties[$name] = $value;
     }
 
@@ -247,7 +249,8 @@ class Project {
      * @see #setProperty()
      */
     public function setUserProperty($name, $value) {
-        $this->log("Setting ro project property: " . $name . " -> " . $value, Project::MSG_DEBUG);
+        $logValue = is_array($value) ? implode(', ', $value) : $value;
+        $this->log("Setting ro project property: " . $name . " -> " . $logValue, Project::MSG_DEBUG);
         $this->userProperties[$name] = $value;
         $this->properties[$name] = $value;
     }
