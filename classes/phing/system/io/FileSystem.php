@@ -427,6 +427,9 @@ abstract class FileSystem {
         $path = $f->getPath();
         $success = @touch($path, $time);
         if (!$success) {
+            $success = @touch($path);
+        }
+        if (!$success) {
             throw new IOException("Could not touch '" . $path . "' due to: $php_errormsg");
         }
     }
