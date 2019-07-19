@@ -376,7 +376,7 @@ class PropertyTask extends Task {
 			if ($file->exists()) {
 				$this->fetchPropertiesFromFile($file, $p);
 			} else {
-				$this->log("Unable to find property file: ". $file->getAbsolutePath() ."... skipped", Project::MSG_WARN);
+				$this->log("Unable to find property file: ". $file->getAbsolutePath() ."... skipped", Project::MSG_INFO);
 			}
 		} catch (IOException $ioe) {
 			throw new BuildException("Could not load properties from file.", $ioe);
