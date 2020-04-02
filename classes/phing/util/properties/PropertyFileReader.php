@@ -45,14 +45,10 @@ class PropertyFileReader {
         
         foreach ($lines as $l) {
         	
-        	if (($p = strpos($l, '#')) !== false)
-        		$l = substr($l, 0, $p);
+            $l = preg_replace('/(?:^|\s+)[;#].*/', '', $l);
 
-        	if (($p = strpos($l, ';')) !== false)
-        		$l = substr($l, 0, $p);
-
-        	if (!($l = trim($l))) 
-        		continue;
+            if (!($l = trim($l))) 
+        	    continue;
 
         	if (preg_match('/^\[([\w-]+)(?:\s*:\s*([\w-]+))?\]$/', $l, $matches)) {
         		$currentSection = $matches[1];
