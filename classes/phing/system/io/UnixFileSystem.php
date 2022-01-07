@@ -77,7 +77,7 @@ class UnixFileSystem extends FileSystem {
         $n = strlen($strPathname);
         $prevChar = 0;
         for ($i=0; $i < $n; $i++) {
-            $c = $strPathname{$i};
+            $c = $strPathname[$i];
             if (($prevChar === '/') && ($c === '/')) {
                 return self::normalizer($strPathname, $n, $i - 1);
             }
@@ -98,7 +98,7 @@ class UnixFileSystem extends FileSystem {
             return $pathname;
         }
         $n = (int) $len;
-        while (($n > 0) && ($pathname{$n-1} === '/')) {
+        while (($n > 0) && ($pathname[$n-1] === '/')) {
             $n--;
         }
         if ($n === 0) {
@@ -111,7 +111,7 @@ class UnixFileSystem extends FileSystem {
         }
         $prevChar = 0;
         for ($i = $offset; $i < $n; $i++) {
-            $c = $pathname{$i};
+            $c = $pathname[$i];
             if (($prevChar === '/') && ($c === '/')) {
                 continue;
             }
@@ -129,7 +129,7 @@ class UnixFileSystem extends FileSystem {
         if (strlen($pathname === 0)) {
             return 0;
         }
-        return (($pathname{0} === '/') ? 1 : 0);
+        return (($pathname[0] === '/') ? 1 : 0);
     }
 
     /**
@@ -143,7 +143,7 @@ class UnixFileSystem extends FileSystem {
             return $parent;
         }
 
-        if ($child{0} === '/') {
+        if ($child[0] === '/') {
             if ($parent === '/') {
                 return $child;
             }
@@ -183,7 +183,7 @@ class UnixFileSystem extends FileSystem {
     function getBooleanAttributes($f) {
         //$rv = getBooleanAttributes0($f);
         $name = $f->getName();
-        $hidden = (strlen($name) > 0) && ($name{0} == '.');
+        $hidden = (strlen($name) > 0) && ($name[0] == '.');
         return ($hidden ? $this->BA_HIDDEN : 0);
     }
 
