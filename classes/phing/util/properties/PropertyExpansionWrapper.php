@@ -22,32 +22,65 @@
 require_once('phing/util/properties/PropertySet.php');
 require_once('phing/util/properties/PropertyExpansionIterator.php');
 
-class PropertyExpansionWrapper implements PropertySet {
+class PropertyExpansionWrapper implements PropertySet
+{
+    protected $helper;
 
-	protected $helper;
-	protected $set;
-	
-	public function __construct(PropertySet $s, $helper = null) {
+    protected $set;
 
-		if ($helper !== null && !($helper instanceof PropertyExpansionHelper))
-			throw new Exception("Provide a instanceof PropertyExpansionHelper");
-		
-		if ($helper === null) {
-			require_once('phing/util/properties/PropertyExpansionHelper.php');
-			$helper = new PropertyExpansionHelper($s);
-		}
-			
-		$this->helper = $helper;
-		$this->set = $s;
-	}
-	
-	public function offsetGet($key): mixed { return $this->helper->expand($this->set->offsetGet($key)); }
-	public function offsetSet($key, $value): void { $this->set->offsetSet($key, $value); }
-	public function offsetExists($key): bool { return $this->set->offsetExists($key); }
-	public function offsetUnset($key): void { $this->set->offsetUnset($key); }
-	public function getIterator(): Traversable { return new PropertyExpansionIterator($this->helper, $this->set->getIterator()); }
-	public function isEmpty() { return $this->set->isEmpty(); }
-	public function keys() { return $this->set->keys(); }
-	public function prefix($pre) { return new PropertyExpansionWrapper($this->set->prefix($pre), $this->helper); } 
-	
+    public function __construct(PropertySet $s, $helper = null)
+    {
+        if ($helper !== null && !($helper instanceof PropertyExpansionHelper)) {
+            throw new Exception("Provide a instanceof PropertyExpansionHelper");
+        }
+
+        if ($helper === null) {
+            require_once('phing/util/properties/PropertyExpansionHelper.php');
+            $helper = new PropertyExpansionHelper($s);
+        }
+
+        $this->helper = $helper;
+        $this->set = $s;
+    }
+
+    #[\ReturnTypeWillChange]
+    public function offsetGet($key)
+    {
+        return $this->helper->expand($this->set->offsetGet($key));
+    }
+
+    public function offsetSet($key, $value): void
+    {
+        $this->set->offsetSet($key, $value);
+    }
+
+    public function offsetExists($key): bool
+    {
+        return $this->set->offsetExists($key);
+    }
+
+    public function offsetUnset($key): void
+    {
+        $this->set->offsetUnset($key);
+    }
+
+    public function getIterator(): Traversable
+    {
+        return new PropertyExpansionIterator($this->helper, $this->set->getIterator());
+    }
+
+    public function isEmpty()
+    {
+        return $this->set->isEmpty();
+    }
+
+    public function keys()
+    {
+        return $this->set->keys();
+    }
+
+    public function prefix($pre)
+    {
+        return new PropertyExpansionWrapper($this->set->prefix($pre), $this->helper);
+    }
 }

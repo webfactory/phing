@@ -177,7 +177,8 @@ class ConditionEnumeration implements Iterator {
         return $this->outer->countConditions() > $this->num;
     }
 
-    function current(): mixed
+    #[\ReturnTypeWillChange]
+    function current()
     {
         $o = $this->outer->conditions[$this->num];
         if ($o instanceof ProjectComponent) {
@@ -190,8 +191,9 @@ class ConditionEnumeration implements Iterator {
     {
         $this->num++;
     }
-    
-    function key(): mixed
+
+    #[\ReturnTypeWillChange]
+    function key()
     {
         return $this->num;
     }

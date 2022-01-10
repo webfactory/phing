@@ -50,7 +50,8 @@ class PropertySetImpl implements PropertySet {
 			unset($this->p[$key]);
 		}
 
-		public function offsetGet($key): mixed
+        #[\ReturnTypeWillChange]
+		public function offsetGet($key)
         {
 			if (preg_match('/(.*)\[([^\]]+)\]$/', $key, $matches)) {
 				$key = $matches[1];

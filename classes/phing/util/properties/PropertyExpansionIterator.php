@@ -12,8 +12,9 @@ class PropertyExpansionIterator extends IteratorIterator {
 		parent::__construct($i);
 		$this->helper = $h;
 	}
-	
-	public function current(): mixed
+
+    #[\ReturnTypeWillChange]
+    public function current()
     {
 		return $this->helper->expand(parent::current());
 	}
