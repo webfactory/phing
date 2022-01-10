@@ -219,11 +219,8 @@ class IntrospectionHelper {
                         $this->warn($method->getDeclaringClass()->getName()."::".$method->getName()."() takes more than one parameter. (IH only uses the first)");
                     }
                     
-                    $classname = null;
-                    
-                    if (($hint = $params[0]->getClass()) !== null) { 
-                        $classname = $hint->getName();    
-                    }                    
+                    /** @var \ReflectionType $hint */
+                    $classname = (($hint = $params[0]->getType()) && !$hint->isBuiltin()) ? $hint->getName() : null;
                     
                     if ($classname === null) {
                         throw new BuildException($method->getDeclaringClass()->getName()."::".$method->getName()."() method MUST use a class hint to indicate the class type of parameter.");
@@ -247,11 +244,8 @@ class IntrospectionHelper {
                         $this->warn($method->getDeclaringClass()->getName()."::".$method->getName()."() takes more than one parameter. (IH only uses the first)");
                     }
 
-                    $classname = null;
-                    
-                    if (($hint = $params[0]->getClass()) !== null) { 
-                        $classname = $hint->getName();    
-                    }                    
+                    /** @var \ReflectionType $hint */
+                    $classname = (($hint = $params[0]->getType()) && !$hint->isBuiltin()) ? $hint->getName() : null;
                     
                     // we don't use the classname here, but we need to make sure it exists before
                     // we later try to instantiate a non-existant class
@@ -318,11 +312,9 @@ class IntrospectionHelper {
             	// Support some special classes as task parameters 
             	// by looking at the setter's type hints.
                 $params = $method->getParameters();
-                $classname = null;
                 
-                if (($hint = $params[0]->getClass()) !== null) {
-                    $classname = $hint->getName();    
-                }
+                /** @var \ReflectionType $hint */
+                $classname = (($hint = $params[0]->getType()) && !$hint->isBuiltin()) ? $hint->getName() : null;
                 
                 if ($classname !== null) {
                     switch(strtolower($classname)) {
@@ -415,11 +407,8 @@ class IntrospectionHelper {
                 // exist and that method is using class hints                
                 $params = $method->getParameters();
 
-                $classname = null;
-            
-                if (($hint = $params[0]->getClass()) !== null) { 
-                    $classname = $hint->getName();    
-                }                
+                /** @var \ReflectionType $hint */
+                $classname = (($hint = $params[0]->getType()) && !$hint->isBuiltin()) ? $hint->getName() : null;
                 
                 // create a new instance of the object and add it via $addMethod                
                 $nestedElement = new $classname();

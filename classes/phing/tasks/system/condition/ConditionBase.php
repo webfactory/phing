@@ -46,7 +46,8 @@ abstract class ConditionBase extends ProjectComponent implements IteratorAggrega
     /**
      * Required for IteratorAggregate
      */
-    function getIterator() {
+    function getIterator(): Traversable
+    {
         return new ConditionEnumeration($this);
     }
     
@@ -171,11 +172,13 @@ class ConditionEnumeration implements Iterator {
         $this->outer = $outer;
     }
     
-    public function valid() {
+    public function valid(): bool
+    {
         return $this->outer->countConditions() > $this->num;
     }
 
-    function current() {
+    function current(): mixed
+    {
         $o = $this->outer->conditions[$this->num];
         if ($o instanceof ProjectComponent) {
             $o->setProject($this->outer->getProject());
@@ -183,15 +186,18 @@ class ConditionEnumeration implements Iterator {
         return $o;
     }
     
-    function next() {
+    function next(): void
+    {
         $this->num++;
     }
     
-    function key() {
+    function key(): mixed
+    {
         return $this->num;
     }
     
-    function rewind() {
+    function rewind(): void
+    {
         $this->num = 0;
     }
 }
