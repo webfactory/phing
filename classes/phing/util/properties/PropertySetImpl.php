@@ -30,11 +30,12 @@ require_once('phing/util/properties/PropertySet.php');
 class PropertySetImpl implements PropertySet {
 		protected $p = array();
 		
-		public function getIterator() {
+		public function getIterator(): Traversable {
 			return new ArrayIterator($this->p);
 		}
 		
-		public function offsetExists($key) {
+		public function offsetExists($key): bool
+        {
 			if (preg_match('/(.*)\[([^\]]*)\]$/', $key, $matches)) {
 				$key = $matches[1];
 				$index = $matches[2];
@@ -44,11 +45,13 @@ class PropertySetImpl implements PropertySet {
 				return isset($this->p[$key]);
 		}
 		
-		public function offsetUnset($key) {
+		public function offsetUnset($key): void
+        {
 			unset($this->p[$key]);
 		}
 
-		public function offsetGet($key) {
+		public function offsetGet($key): mixed
+        {
 			if (preg_match('/(.*)\[([^\]]+)\]$/', $key, $matches)) {
 				$key = $matches[1];
 				$index = $matches[2];
@@ -61,7 +64,8 @@ class PropertySetImpl implements PropertySet {
 				return $this->p[$key];
 		}
 		
-		public function offsetSet($key, $value) {
+		public function offsetSet($key, $value): void
+        {
 			if (!$key) 
 				throw new Exception("Properties must have names.");
 				

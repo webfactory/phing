@@ -212,8 +212,11 @@ class rSTTask extends Task
         $this->fileUtils->copyFile(
             new PhingFile($tmpTarget),
             new PhingFile($targetFile),
-            true, false, $this->filterChains,
-            $this->getProject(), $this->mode
+            $this->getProject(),
+            true,
+            false,
+            $this->filterChains,
+            $this->mode
         );
         unlink($tmpTarget);
     }

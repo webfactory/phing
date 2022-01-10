@@ -219,7 +219,7 @@ class Properties implements IteratorAggregate {
         return $this->properties->isEmpty();
     }
     
-    public function getIterator() {
+    public function getIterator(): Traversable {
     	return $this->properties->getIterator();
     }
 

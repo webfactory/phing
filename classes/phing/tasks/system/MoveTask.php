@@ -88,7 +88,7 @@ class MoveTask extends CopyTask {
                 $moved = false;
                 try { // try to rename                    
                     $this->log("Attempting to rename $from to $to", $this->verbosity);
-                    $this->fileUtils->copyFile($f, $d, $this->forceOverwrite, $this->preserveLMT, $this->filterChains, $this->getProject(), $this->mode);
+                    $this->fileUtils->copyFile($f, $d, $this->getProject(), $this->forceOverwrite, $this->preserveLMT, $this->filterChains, $this->mode);
                     $f->delete(true);
                     $moved = true;
                 } catch (IOException $ioe) {
@@ -115,7 +115,7 @@ class MoveTask extends CopyTask {
                 try { // try to move
                     $this->log("Moving $from to $to", $this->verbosity);
 
-                    $this->fileUtils->copyFile($f, $d, $this->forceOverwrite, $this->preserveLMT, $this->filterChains, $this->getProject(), $this->mode);
+                    $this->fileUtils->copyFile($f, $d, $this->getProject(), $this->forceOverwrite, $this->preserveLMT, $this->filterChains, $this->mode);
 
                     $f->delete();
                 } catch (IOException $ioe) {

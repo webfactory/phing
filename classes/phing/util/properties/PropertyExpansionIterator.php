@@ -13,7 +13,8 @@ class PropertyExpansionIterator extends IteratorIterator {
 		$this->helper = $h;
 	}
 	
-	public function current() {
+	public function current(): mixed
+    {
 		return $this->helper->expand(parent::current());
 	}
 }

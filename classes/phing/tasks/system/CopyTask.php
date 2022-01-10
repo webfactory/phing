@@ -456,7 +456,7 @@ class CopyTask extends Task {
                     $toSlot->setValue($toFile->getPath());
                     $toBasenameSlot->setValue($toFile->getName());
                     
-                    $this->fileUtils->copyFile($fromFile, $toFile, $this->overwrite, $this->preserveLMT, $this->filterChains, $this->getProject(), $this->mode);
+                    $this->fileUtils->copyFile($fromFile, $toFile, $this->getProject(), $this->overwrite, $this->preserveLMT, $this->filterChains, $this->mode);
             
                     $count++;
                 } catch (IOException $ioe) {

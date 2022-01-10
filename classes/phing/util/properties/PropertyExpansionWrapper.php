@@ -41,11 +41,11 @@ class PropertyExpansionWrapper implements PropertySet {
 		$this->set = $s;
 	}
 	
-	public function offsetGet($key) { return $this->helper->expand($this->set->offsetGet($key)); }
-	public function offsetSet($key, $value) { $this->set->offsetSet($key, $value); }
-	public function offsetExists($key) { return $this->set->offsetExists($key); }
-	public function offsetUnset($key) { $this->set->offsetUnset($key); }
-	public function getIterator() { return new PropertyExpansionIterator($this->helper, $this->set->getIterator()); }
+	public function offsetGet($key): mixed { return $this->helper->expand($this->set->offsetGet($key)); }
+	public function offsetSet($key, $value): void { $this->set->offsetSet($key, $value); }
+	public function offsetExists($key): bool { return $this->set->offsetExists($key); }
+	public function offsetUnset($key): void { $this->set->offsetUnset($key); }
+	public function getIterator(): Traversable { return new PropertyExpansionIterator($this->helper, $this->set->getIterator()); }
 	public function isEmpty() { return $this->set->isEmpty(); }
 	public function keys() { return $this->set->keys(); }
 	public function prefix($pre) { return new PropertyExpansionWrapper($this->set->prefix($pre), $this->helper); } 
