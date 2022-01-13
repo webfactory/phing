@@ -388,7 +388,9 @@ abstract class FileSystem {
      */
     function createDirectory(&$f, $mode = 0755) {
         $old_umask = umask(0);
+        set_error_handler(function () { /* silence */});
         $return = @mkdir($f->getAbsolutePath(), $mode);
+        restore_error_handler();
         umask($old_umask);
         return $return;
     }
