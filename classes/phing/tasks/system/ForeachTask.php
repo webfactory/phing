@@ -132,7 +132,7 @@ class ForeachTask extends Task {
             $mapper = $this->mapperElement->getImplementation();
         }
         
-        if (trim($this->list)) {
+        if (trim((string) $this->list)) {
             $arr = explode($this->delimiter, $this->list);
         
             foreach ($arr as $value) {

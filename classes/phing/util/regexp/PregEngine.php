@@ -76,7 +76,7 @@ class PregEngine implements RegexpEngine {
             $mods = str_replace('s', '', $mods);
         }
         // filter out duplicates
-        $mods = preg_split('//', $mods, -1, PREG_SPLIT_NO_EMPTY);
+        $mods = preg_split('//', (string) $mods, -1, PREG_SPLIT_NO_EMPTY);
         $mods = implode('', array_unique($mods));
         return $mods;
     }
