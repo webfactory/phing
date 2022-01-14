@@ -127,11 +127,8 @@ abstract class FileSystem {
      * Resolve the child pathname string against the parent.
      * Both strings must be in normal form, and the result
      * will be a string in normal form.
-     * 
-     * @param string $parent
-     * @param string $child
      */
-    abstract function resolve($parent, $child);
+    abstract function resolve(string $parent, string $child): string;
     
     /**
      * Resolve the given abstract pathname into absolute form.  Invoked by the

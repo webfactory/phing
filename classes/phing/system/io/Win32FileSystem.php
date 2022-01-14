@@ -238,7 +238,8 @@ class Win32FileSystem extends FileSystem {
         return 0;                    // Completely relative
     }
 
-    function resolve($parent, $child) {
+    function resolve(string $parent, string $child): string
+    {
         $parent = (string) $parent;
         $child  = (string) $child;
         $slash  = (string) $this->slash;

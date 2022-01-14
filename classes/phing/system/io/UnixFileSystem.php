@@ -71,7 +71,7 @@ class UnixFileSystem extends FileSystem {
     function normalize($strPathname) {
         
         if (!strlen($strPathname)) {
-            return;
+            return '';
         }
 
         $n = strlen($strPathname);
@@ -137,8 +137,8 @@ class UnixFileSystem extends FileSystem {
      * Both strings must be in normal form, and the result
      * will be in normal form.
      */
-    function resolve($parent, $child) {
-
+    function resolve(string $parent, string $child): string
+    {
         if ($child === "") {
             return $parent;
         }
