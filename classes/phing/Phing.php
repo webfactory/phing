@@ -138,6 +138,9 @@ class Phing {
      */
     private static $origIniSettings = array();
 
+    /** @var ?string */
+    private $searchForThis = null;
+
     /**
      * Entry point allowing for more options from other front ends.
      *
