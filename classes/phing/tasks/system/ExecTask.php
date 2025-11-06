@@ -121,7 +121,8 @@ class ExecTask extends Task
      */
     protected $checkreturn = false;
 
-
+    /** @var string */
+    protected $currdir;
 
     public function __construct()
     {

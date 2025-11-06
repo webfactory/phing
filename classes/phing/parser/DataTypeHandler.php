@@ -42,6 +42,9 @@ class DataTypeHandler extends AbstractHandler {
     private $element;
     private $wrapper;
 
+    /** @var ProjectConfigurator */
+    private $configurator;
+
     /**
      * Constructs a new DataTypeHandler and sets up everything.
      *

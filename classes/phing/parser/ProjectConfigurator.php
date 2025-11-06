@@ -53,6 +53,9 @@ class ProjectConfigurator {
     /** Name of the current project */
     private $currentProjectName;
 
+    /** @var array */
+    private $currentTargets;
+
     private $isParsing = true;
 
     /**

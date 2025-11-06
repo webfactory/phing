@@ -59,6 +59,8 @@ class Project {
     
     /** Project properties map (usually String to String). */
     private $properties;
+
+    private $propertyExpansionHelper;
     
     /**
      * Map of "user" properties (as created in the Ant task, for example).

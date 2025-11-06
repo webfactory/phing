@@ -38,6 +38,9 @@ include_once 'phing/TaskContainer.php';
 
 class NestedElementHandler extends AbstractHandler {
 
+    /** @var ProjectConfigurator */
+    private $configurator;
+
     /**
      * Reference to the parent object that represents the parent tag
      * of this nested element

@@ -48,6 +48,9 @@ class AvailableTask extends Task {
     
     private $followSymlinks = false;
 
+    /** @var PhingFile */
+    private $file;
+
     function setProperty($property) {
         $this->property = (string) $property;
     }

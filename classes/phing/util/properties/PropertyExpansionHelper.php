@@ -26,7 +26,8 @@ require_once('phing/util/properties/PropertySet.php');
  */
 class PropertyExpansionHelper {
 	protected $set;
-	
+    private $refStack;
+
 	public function __construct(PropertySet $s) {
 		$this->set = $s;
 	}
